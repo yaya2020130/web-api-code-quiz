@@ -13,22 +13,28 @@ body{
  height:20vw;
  background: green;
 }
+#answerDiv{
+  padding:50px 10px;
+width:80%;
+background-color: lawngreen;
 
-
-
-.container{
-  width:800px;
-  max-width:80%;
-  background-color: honeydew;
-  border-radius: 5px;
-  padding:10px;
 }
+ #timerDiv{
+margin:300px;
+margin: 40px 40px;
+ }
+#qDiv{
+  padding:40px ;
+  width:80%;
+  background-color: lightpink;
 
-
+  margin: 40px 40px;
+}
 
 
 #start{
   font-size:1.5rem;
+  margin: 40px 40px;
   font-weight:bold;
   padding:10px 20px;
   background-color: indianred;
