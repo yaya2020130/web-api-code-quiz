@@ -7,7 +7,7 @@ var questions = [
   {
       q: "q2 - 1+2=?",
       a: ['1', '3', '5', '6'],
-      c: 3
+      c: 1
   },
   {
       q: "q3 - how many continets are there?",
@@ -68,7 +68,8 @@ function checkAnswer(bool){
 function gameOver(){
   clearInterval(timer)
   document.querySelector('#timerDiv').textContent = 0;
-  alert('GAME OVER!')
+  // alert('GAME OVER!')
+
   highScore()
 }
 
@@ -86,3 +87,4 @@ function highScore(){
   results.appendChild(input);
   results.appendChild(btn)
 }
+
