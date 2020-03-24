@@ -1,90 +1,163 @@
+var counter = 60;
+var timer;
+var runningQuestionIndex = 0;
+var score = 0;
+//Ternary statement
+// if(localStorage.getItem('score')){
+//  var highscores = JSON.parse(localStorage.getItem('score'))
+//}else{
+//  var highscores = []
+//}
+
+var highscores = localStorage.getItem('score') ? JSON.parse(localStorage.getItem('score')) : []
+
+
+
+const start = document.getElementById("start");
+const quiz = document.getElementById("quiz");
+const question = document.getElementById("question");
+const choiceA = document.getElementById("A");
+const choiceB = document.getElementById("B");
+const choiceC = document.getElementById("C");
+const progress = document.getElementById("progress");
+const timerDiv = document.getElementById('counter')
+
+
 var questions = [
   {
-      q: "q1 - What is biology?",
-      a: ['it is a study of natural science that studies about living and non living things', 'it studies history', 'c', 'dnone'],
-      c: 0
+    question: "q1 - What is biology?",
+    choiceA: "it is a study of natural science that  studies about living and non living things",
+    choiceB: "it studies history",
+    choiceC: 'dnone',
+    answer: "C"
+
+  },
+
+  {
+    question: "q2 - What is biology?",
+    choiceA: "it is a study of natural science that studies about living and non living things",
+    choiceB: "it studies history",
+    choiceC: 'dnone',
+    answer: "B"
   },
   {
-      q: "q2 - 1+2=?",
-      a: ['1', '3', '5', '6'],
-      c: 1
+    question: "q3 - What is biology?",
+    choiceA: "it is a study of natural science that studies about living and non living things",
+    choiceB: "it studies history",
+    choiceC: 'dnone',
+    answer: "A"
   },
-  {
-      q: "q3 - how many continets are there?",
-      a: ['1', '2', 'c', '7'],
-      c: 3
-  }
+
 ]
-var counter = 0;
-var seconds = 60;
-var timer ;
-var score = 0;
+var answer = document.getElementById("#answerDiv")
+const lastQuestion = (questions.Length) - 1;
 
-function time() {
-  if(seconds <= 0){
-      gameOver()
-  }else{
-      document.querySelector('#timerDiv').textContent = seconds;
-  seconds--;
+document.getElementById('choices').addEventListener('click', function (e) {
+  if (e.target.matches('button')) {
+    checkAnswer(e.target.id)
   }
-}
-
-function appendQ() {
-  document.querySelector('#scoreDiv').textContent = score;
-  document.getElementById('answerDiv').innerHTML = ''
-  document.getElementById('qDiv').textContent = questions[counter].q
-  questions[counter].a.map((answer, i) => {
-      var textNode = document.createTextNode(answer);
-      var button = document.createElement('button');
-      button.setAttribute('id', i)
-      button.appendChild(textNode);
-      button.addEventListener('click', function (e) {
-          checkAnswer(e.target.id == questions[counter].c)
-      })
-      document.getElementById('answerDiv').appendChild(button)
-  }
-  )
-}
-
-document.getElementById('start').addEventListener('click', function () {
- timer = setInterval(time, 1000)
-  appendQ()
 })
 
-function checkAnswer(bool){
-  if(bool){
-      counter ++;
-      score ++;
-      if(counter === questions.length){
-      gameOver()
-  }else{
-      appendQ()
+// render a question
+function renderQuestion() {
+  if (runningQuestionIndex === questions.length) {
+    endgame()
+  } else {
+    let q = questions[runningQuestionIndex];
+    question.innerHTML = "<p>" + q.question + "</p>";
+    choiceA.innerHTML = `<button id='A'>${q.choiceA}</button>`;
+    choiceB.innerHTML = `<button id='B'>${q.choiceB}</button>`;
+    choiceC.innerHTML = `<button id='C'>${q.choiceC}</button>`;
   }
-  }else{
-      seconds -= 10;
+};
+
+// counter render
+function counterRender() {
+  if (counter > 0) {
+    timerDiv.textContent = counter;
+    counter--;
+  } else {
+
+    clearInterval(timer)
+    endgame()
+    scoreRender()
   }
 }
 
-function gameOver(){
+
+// start quiz
+function startquiz() {
+  start.style.display = "none";
+  quiz.style.display = "block";
+  timer = setInterval(counterRender, 1000)
+  renderQuestion();
+}
+
+document.querySelector("#start").addEventListener("click", startquiz);
+
+function scoreRender() {
+  scoreRender.style.display = "block";
+  let scorepercent = mat.round(100 * score / question.length);
+};
+
+function checkAnswer(answer) {
+
+  if (answer == questions[runningQuestionIndex].answer) {
+    score++;
+    answerIsCorrect();
+  } else {
+    answerIsWrong();
+    counter -= 10
+  }
+}
+
+function endgame() {
   clearInterval(timer)
-  document.querySelector('#timerDiv').textContent = 0;
-  // alert('GAME OVER!')
-
-  highScore()
+  document.querySelector('#timer').textContent = 0;
+  alert('GAME OVER!')
+  scoreRender()
 }
 
-function highScore(){
-  document.querySelector('#time').setAttribute('display', 'none');
-  var results = document.querySelector('#results');
+//  score render
+function scoreRender() {
+  appendScores()
+  scoreContainer.style.display = "block";
   var input = document.createElement('input');
-  input.setAttribute('id', 'inputScore');
-  var btnTxt = document.createTextNode( "enter your intials "+'Submit');
+  input.setAttribute('id', 'name');
   var btn = document.createElement('button');
-  btn.addEventListener('click', function(){
-      localStorage.setItem('database', JSON.stringify({[input.value]:score}))
+  btn.textContent = "Submit";
+  btn.addEventListener('click', function () {
+    highscores.push(`${input.value} - ${score}`);
+    localStorage.setItem('score', JSON.stringify(highscores))
+    appendScores()
   })
-  btn.appendChild(btnTxt);
-  results.appendChild(input);
-  results.appendChild(btn)
+  scoreContainer.appendChild(input);
+  scoreContainer.appendChild(btn)
+  // calculate the amount of question answer percent answeed by the user
+  // const scorePerCent = Math.round(100 * score / question.length);
+  // scoreContainer.counter.innerHTML += "<p>" + scorepercent + "</p>";
+
+}
+function appendScores() {
+  document.getElementById('scoreList').innerHTML = ''
+  highscores.forEach(highscore => {
+    var scoreList = document.createElement('h3');
+    scoreList.textContent = highscore;
+    document.getElementById('scoreList').appendChild(scoreList)
+  })
 }
 
+
+// answer is wrong
+
+function answerIsWrong() {
+  alert('WRONG!')
+  runningQuestionIndex++;
+  renderQuestion()
+}
+// answer is correct
+function answerIsCorrect() {
+  alert('RIGHT!')
+  runningQuestionIndex++;
+  renderQuestion()
+}

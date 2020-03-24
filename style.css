@@ -1,48 +1,59 @@
-*,*::before, *::after{
+/* *,*::before, *::after{
   box-sizing:border-box;
   font-family: 'Times New Roman', Times, serif;
-}
+} */
 
-body{
+/* body{
   padding:0;
  margin:0;
  display:flex;
  justify-content:center;
  align-items:center;
  width:100vw;
- height:20vw;
+ height:100vw;
  background: green;
-}
-#answerDiv{
+} */
+#answer{
   padding:50px 10px;
-width:80%;
+
 background-color: lawngreen;
 
 }
- #timerDiv{
+ #timer{
 margin:300px;
 margin: 40px 40px;
  }
-#qDiv{
+#question{
   padding:40px ;
-  width:80%;
-  background-color: lightpink;
+ float: left;
+  background-color: white;
 
   margin: 40px 40px;
 }
-
+#choices{
+  flex: auto;
+}
 
 #start{
   font-size:1.5rem;
-  margin: 40px 40px;
+  margin: 100px 40px;
   font-weight:bold;
   padding:10px 20px;
   background-color: indianred;
+float: right;
+}
+
+#container{
+background-color: brown;
 
 }
 
+#quiz{
+  width:70%;
+  height:70%;
+  background-color: cornflowerblue;
+  margin:40px 40px;
 
-
-
+}
 
 

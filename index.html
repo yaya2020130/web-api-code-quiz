@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>quiz game</title>
     <link rel="stylesheet" href="style.css">
+    <title>Document</title>
 </head>
-
 <body>
-    <button id="start">START</button>
-    <div id="qDiv"></div>
-    <div id="answerDiv"></div>
-    <div id="time">
-        <div style='position: absolute; top: 400px; left: 20%'><h1>TIME LEFT:<span id="timerDiv"></span></h1></div>
-    <div style='position: absolute; top: 800px; left: 40%'><h1>Score:<span id="scoreDiv"></span></h1></div>
+    <div id="container">
+    <button id="start">start Quiz</button>
+    <div id="quiz" style="display:none">
+        <div id="question"><p>question</p></div>
+        <div id="answerDiv"><p></p></div>  
+        <div id="timer">TIME LEFT : 
+            <span id="counter"></span></div>
+    <div id="choices"  >
+        <div class="choice" id='A' ></div>
+        <div class="choice" id='B' ></div>
+        <div class="choice" id='C' ></div></div>
     </div>
-    <div id="results">
-
     </div>
-    
-    <script src="script.js"></script>
+    <div id="scoreContainer"style="display:none;">
         
-
+    </div>
+    <div id="scoreList"></div>
+</div>
+    <script src="script.js"></script>
+</body>
 </html>
