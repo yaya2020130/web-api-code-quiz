@@ -7,4 +7,4 @@ The app has a written questions inside the jquery so it uses the following work 
 4. it will give the final score
 
 ---
- ![Alt Text](exam.jpeg.png)
+ ![Alt Text](exam.jpeg)
