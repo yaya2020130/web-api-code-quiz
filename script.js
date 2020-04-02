@@ -25,26 +25,26 @@ const timerDiv = document.getElementById('counter')
 
 var questions = [
   {
-    question: "q1 - What is biology?",
+    question: " Q1  What is HTML?",
     choiceA: "it is a study of natural science that  studies about living and non living things",
-    choiceB: "it studies history",
-    choiceC: 'dnone',
+    choiceB: "It is css ",
+    choiceC: "It is hyper text markup language",
     answer: "C"
 
   },
 
   {
-    question: "q2 - What is biology?",
-    choiceA: "it is a study of natural science that studies about living and non living things",
-    choiceB: "it studies history",
-    choiceC: 'dnone',
+    question: "Q2 - What is web development?",
+    choiceA: "It is a study of natural science that studies about living and non living things",
+    choiceB: "Web development is the work involved in developing a website for the Internet or an intranet.",
+    choiceC: 'none',
     answer: "B"
   },
   {
-    question: "q3 - What is biology?",
-    choiceA: "it is a study of natural science that studies about living and non living things",
-    choiceB: "it studies history",
-    choiceC: 'dnone',
+    question: "Q3 - what is css ?",
+    choiceA: "iIt is a study of natural science that studies about living and non living things",
+    choiceB: "It is Cascading Style Sheetsistory",
+    choiceC: 'none',
     answer: "A"
   },
 
